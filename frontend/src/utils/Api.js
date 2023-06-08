@@ -13,6 +13,7 @@ class Api {
     const token = localStorage.getItem("token");
     let defaultHeaders = {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "cors"
     }
     if (token) {
       defaultHeaders['Authorization'] = `Bearer ${token}`;

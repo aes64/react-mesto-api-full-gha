@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -17,23 +16,15 @@ mongoose.set('strictQuery', true);
 mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
-const allowedCors = [
-  'http://aesmesto.students.nomoredomains.rocks',
-  'https://aesmesto.students.nomoredomains.rocks',
-  'localhost:3000'
-];
 
 app.use(function(req, res, next) {
   const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
   res.header('Access-Control-Allow-Origin', "*");
   const { method } = req;
-
-  const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE"; 
   if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    const requestHeaders = req.headers['access-control-request-headers'];
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
   } 
   next();
 });
