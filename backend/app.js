@@ -17,22 +17,11 @@ mongoose.set('strictQuery', true);
 mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
-app.use(cors());
-
-const allowedCors = [
+app.use(cors({ origin: [
   'http://aesmesto.students.nomoredomains.rocks',
   'https://aesmesto.students.nomoredomains.rocks',
   'localhost:3000'
-];
-
-app.use(function(req, res, next) {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  // проверяем, что источник запроса есть среди разрешённых 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', "*");
-  }
-  next();
-});
+] }));
 
 app.use(requestLogger);
 
