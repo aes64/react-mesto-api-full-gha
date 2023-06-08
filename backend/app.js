@@ -18,6 +18,22 @@ mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhos
 
 app.use(express.json());
 app.use(cors());
+
+const allowedCors = [
+  'http://aesmesto.students.nomoredomains.rocks',
+  'https://aesmesto.students.nomoredomains.rocks',
+  'localhost:3000'
+];
+
+app.use(function(req, res, next) {
+  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+  // проверяем, что источник запроса есть среди разрешённых 
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
 app.use(requestLogger);
 
 app.get('/crash-test', () => {
