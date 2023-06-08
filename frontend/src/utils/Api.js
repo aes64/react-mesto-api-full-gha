@@ -85,7 +85,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "http://api.aesmesto.students.nomoredomains.rocks.co",
 });
 
 export default api;

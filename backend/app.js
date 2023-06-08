@@ -14,7 +14,7 @@ const { NODE_ENV, MONGO_URL } = process.env;
 const { PORT = 3000 } = process.env;
 
 mongoose.set('strictQuery', true);
-mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/mestodb');
+mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
 app.use(cors());

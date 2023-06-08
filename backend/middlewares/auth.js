@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../utils/error/UnauthorizedError');
 const errors = require('../utils/constants');
 
+const jwtSecret = (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET) || 'super-strong-secret'
+
+console.log(jwtSecret)
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
   let payload;
@@ -10,7 +13,7 @@ module.exports = (req, res, next) => {
       throw new UnauthorizedError(errors.UNAUTHORIZED);
     }
     const token = authorization.replace('Bearer ', '');
-    payload = jwt.verify(token, 'super-strong-secret');
+    payload = jwt.verify(token, jwtSecret);
   } catch (err) {
     next(new UnauthorizedError(errors.UNAUTHORIZED));
   }
