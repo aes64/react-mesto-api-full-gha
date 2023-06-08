@@ -1,0 +1,23 @@
+.popup__error {
+    color: rgba(255, 0, 0, 1);
+    font-size: 12px;
+    line-height: 14px;
+    position: absolute;
+    top:37%;
+    visibility: hidden;
+}
+
+.popup__error:last-of-type {
+top:62%;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__error {
+        top:44%;
+    }
+
+    .popup__error:last-of-type {
+        top:66%;
+        }
+    
+}

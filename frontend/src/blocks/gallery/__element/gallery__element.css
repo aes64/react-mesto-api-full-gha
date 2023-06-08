@@ -1,0 +1,8 @@
+.gallery__element {
+    width: 282px;
+    height: 361px;
+    border-radius: 3%;
+    overflow: hidden;
+    background-color: #fff;
+    position: relative;
+}

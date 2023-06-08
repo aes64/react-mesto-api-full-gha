@@ -1,0 +1,18 @@
+.gallery__button-delete {
+    background-image: url(../../../images/Trash.svg);
+    background-color: transparent;
+    background-size: contain;
+    width: 18px;
+    height: 19px;
+    align-self: center;
+    border: none;
+    background-position: center;
+    padding: 0;
+    position: absolute;
+    top:20px;
+    right: 20px;
+    }
+    
+   
+    
+

@@ -1,0 +1,8 @@
+.gallery__element-description {
+    margin: 0;
+    padding: 0 13px 0 21px;
+    min-height: 79px;
+    display: flex;
+    color: #000000;
+    justify-content: space-between;
+}

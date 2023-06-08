@@ -1,0 +1,7 @@
+.popup__fieldset {
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

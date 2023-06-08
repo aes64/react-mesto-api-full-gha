@@ -1,0 +1,21 @@
+.profile__button-edit {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #FFFFFF;
+    background-color: #000000;
+    background-image: url(../../../images/pen-edit.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+    margin: 23px 0 0;
+}
+
+@media screen and (max-width:500px) {
+    .profile__button-edit {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+
+    }
+    
+}

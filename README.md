@@ -8,8 +8,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.97.58
 
-Frontend https://...
+Frontend https://github.com/aes64/react-mesto-auth - несобранный проект с авторизацией
 
 Backend https://...
