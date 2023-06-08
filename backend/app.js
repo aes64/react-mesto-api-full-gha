@@ -17,11 +17,20 @@ mongoose.set('strictQuery', true);
 mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
-app.use(cors({ origin: [
+const whitelist = [
   'http://aesmesto.students.nomoredomains.rocks',
   'https://aesmesto.students.nomoredomains.rocks',
   'localhost:3000'
-] }));
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}));
 
 app.use(requestLogger);
 
