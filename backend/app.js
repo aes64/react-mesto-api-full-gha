@@ -16,14 +16,30 @@ const { PORT = 3000 } = process.env;
 mongoose.set('strictQuery', true);
 mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhost:27017/mestodb');
 
-app.use(express.json());
+
+const allowedCors = [
+  'http://aesmesto.students.nomoredomains.rocks',
+  'https://aesmesto.students.nomoredomains.rocks',
+  'localhost:3000'
+];
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Origin', "*");
+  const { method } = req;
+
+  const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE"; 
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.end();
+  } 
   next();
 });
 
+app.use(express.json());
 app.use(requestLogger);
 
 app.get('/crash-test', () => {
