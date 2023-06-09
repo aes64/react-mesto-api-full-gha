@@ -68,8 +68,7 @@ class Auth {
 const auth = new Auth({
   baseUrl: "http://api.aesmesto.students.nomoredomains.rocks",
   headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "cors"
+    "Content-Type": "application/json"
   }
 });
 
