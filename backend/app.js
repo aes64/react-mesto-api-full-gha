@@ -19,7 +19,18 @@ mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhos
 app.use(express.json());
 
 
-app.options('*', cors())
+app.use(cors({
+  origin: [
+    'http://aesmesto.students.nomoredomains.rocks',
+    'https://aesmesto.students.nomoredomains.rocks',
+    'localhost:3000'
+  ],
+  methods:[],
+  allowedHeaders:[],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}));
 
 
 app.use(requestLogger);
