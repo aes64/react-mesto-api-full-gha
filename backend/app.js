@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -17,17 +18,19 @@ mongoose.connect((NODE_ENV === 'production' && MONGO_URL) || 'mongodb://localhos
 
 app.use(express.json());
 
-app.use(function(req, res, next) {
-  const { origin } = req.headers;
-  res.header('Access-Control-Allow-Origin', "*");
-  const { method } = req;
-  if (method === 'OPTIONS') {
-    const requestHeaders = req.headers['access-control-request-headers'];
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  } 
-  next();
-});
+
+app.use(cors({
+  origin: [
+    'http://aesmesto.students.nomoredomains.rocks',
+    'https://aesmesto.students.nomoredomains.rocks',
+    'localhost:3000'
+  ],
+  methods:[],
+  allowedHeaders:[],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}));
 
 
 app.use(requestLogger);
