@@ -7,6 +7,8 @@ const NotFoundError = require('../utils/error/NotFoundError');
 const BadRequestError = require('../utils/error/BadRequestError');
 const AlreadyExistError = require('../utils/error/AlreadyExistError');
 
+const jwtSecret = (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET) || 'super-strong-secret'
+
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ users }))
@@ -49,7 +51,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'super-strong-secret',
+        jwtSecret,
         { expiresIn: '7d' },
       );
       return res.send({ email, password, token });

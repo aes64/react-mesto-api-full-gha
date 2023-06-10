@@ -4,7 +4,6 @@ const errors = require('../utils/constants');
 
 const jwtSecret = (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET) || 'super-strong-secret'
 
-console.log(jwtSecret)
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
   let payload;
