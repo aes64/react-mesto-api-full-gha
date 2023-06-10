@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.97.58
+IP 158.160.97.58
 
 Frontend https://aesmesto.students.nomoredomains.rocks
 
