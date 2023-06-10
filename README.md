@@ -10,6 +10,6 @@
 
 IP-адрес 158.160.97.58
 
-Frontend https://github.com/aes64/react-mesto-auth - несобранный проект с авторизацией
+Frontend https://aesmesto.students.nomoredomains.rocks
 
-Backend https://...
+Backend https://api.aesmesto.students.nomoredomains.rocks
