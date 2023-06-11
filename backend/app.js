@@ -41,10 +41,9 @@ app.use('/cards', require('./routes/cards'));
 app.use('/users', require('./routes/users'));
 app.use('/', require('./routes/notFound'));
 
-app.use('/', require('./utils/error/CentralError'));
-
 app.use(errorLogger);
 app.use(errors());
+app.use('/', require('./utils/error/CentralError'));
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
