@@ -3,6 +3,7 @@ const express = require('express');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const errorName = require('./utils/constants');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -32,6 +33,9 @@ app.post('/signin', celebrate({
 }), login);
 app.post('/signup', celebrate({
   body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string().min(2).pattern(errorName.REGEXPHTTP),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
