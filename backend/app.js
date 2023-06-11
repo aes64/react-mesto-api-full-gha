@@ -1,12 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const errorName = require('./utils/constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
@@ -42,7 +40,9 @@ app.use(auth);
 app.use('/cards', require('./routes/cards'));
 app.use('/users', require('./routes/users'));
 app.use('/', require('./routes/notFound'));
+
 app.use('/', require('./utils/error/CentralError'));
+
 app.use(errorLogger);
 app.use(errors());
 
