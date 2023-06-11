@@ -54,7 +54,7 @@ module.exports.login = (req, res, next) => {
         jwtSecret,
         { expiresIn: '7d' },
       );
-      return res.send({ email, password, token });
+      return res.send({ token });
     })
     .catch(next);
 };
@@ -97,7 +97,11 @@ module.exports.updateUser = (req, res, next) => {
     },
   )
     .then((user) => {
-      res.send({ data: user });
+      if (user) {
+        res.send({ data: user });
+      } else {
+        next(new NotFoundError(errors.NOT_FOUND));
+      }
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
